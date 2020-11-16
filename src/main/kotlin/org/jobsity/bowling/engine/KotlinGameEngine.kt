@@ -52,7 +52,7 @@ class KotlinGameEngine : BowlingGameEngine {
             val str1 = player.frames.joinToString(separator = "") { it.getPrintString() }
             val str2 =
                 player.frames.joinToString(separator = "\t\t") { cumulativeScore += it.score; "$cumulativeScore" }
-            out.println("Pinfall\t$str1")
+            out.println("Pinfalls\t$str1")
             out.println("Score\t $str2")
         }
     }

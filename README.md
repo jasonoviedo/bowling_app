@@ -13,13 +13,24 @@ implementation. To prove this, the implementation uses [Kotlin](https://kotlinla
 a JVM compatible language.
 
 ## Usage
-For *Nix like systems:
+For *Nix like systems, use gradlew, for Windows, gradlew.bat:
 
 ```bash
-gradlew run --args="data/datai.txt"
+./gradlew run --args="data/datai.txt"
 ```
 Four data files are included in the data folder for testing
 purposes (data0 through data3).
+
+data0.txt = No fouls, Jeff only throws twice on th 10th, John three times
+data1.txt = Sample input
+data2.txt = Fouls and misses
+data3.txt = All failed
+data4.txt = Perfect game
+
+The test set can be run like this:
+```bash
+./gradlew test
+```
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
