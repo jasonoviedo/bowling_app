@@ -1,6 +1,0 @@
-org/jobsity/Main.java
- org.jobsity.Main
-org/jobsity/TxtParser.java
- org.jobsity.TxtParser
-org/jobsity/BowlingTokenizer.java
- org.jobsity.BowlingTokenizer
