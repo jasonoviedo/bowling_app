@@ -11,8 +11,8 @@ import java.io.PrintStream
  * players are added after the fisrt round is completed
  */
 class KotlinGameEngine : BowlingGameEngine {
-    var firstPlayer: String? = null
-    var finishedFirstRound = false
+    private var firstPlayer: String? = null
+    private var finishedFirstRound = false
 
     var players = mutableMapOf<String, BowlingPlayer>()
 
@@ -20,7 +20,7 @@ class KotlinGameEngine : BowlingGameEngine {
      * Add a new player or access an existing one
      * @throws IllegalStateException When a player is added after frist round
      */
-    fun getOrRecordPlayerFor(p: BowlingPlay): BowlingPlayer {
+    fun getOrRecordPlayerFor(p: KotlinPlay): BowlingPlayer {
 
         //Just starting
         if (players.isEmpty())
@@ -48,7 +48,7 @@ class KotlinGameEngine : BowlingGameEngine {
         out.println("Frame\t\t" + List(10) { it + 1 }.joinToString(separator = "\t\t"))
         for (player in players.values) {
             out.println(player.name)
-            var cumulativeScore = 0;
+            var cumulativeScore = 0
             val str1 = player.frames.joinToString(separator = "") { it.getPrintString() }
             val str2 =
                 player.frames.joinToString(separator = "\t\t") { cumulativeScore += it.score; "$cumulativeScore" }
@@ -58,8 +58,9 @@ class KotlinGameEngine : BowlingGameEngine {
     }
 
     override fun addPlay(play: BowlingPlay) {
-        val player = getOrRecordPlayerFor(play)
-        player.addPlay(play)
+        val kPlay = KotlinPlay(play.name, play.pinCount, play.isFoul)
+        val player = getOrRecordPlayerFor(kPlay)
+        player.addPlay(kPlay)
     }
 
     override fun start() {

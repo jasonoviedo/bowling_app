@@ -1,6 +1,5 @@
-package org.jobsity;
+package org.jobsity.bowling;
 
-import org.jobsity.bowling.BowlingTokenizer;
 import org.jobsity.bowling.engine.BowlingGameEngine;
 import org.jobsity.bowling.engine.BowlingPlay;
 import org.jobsity.bowling.engine.KotlinGameEngine;
@@ -13,7 +12,7 @@ public class Bowling {
 
     //These could be injected using a dependency injector like Guice
     private final TxtReader reader;
-    private final BowlingTokenizer tokenizer;
+    private final BowlingPlayReader playReader;
     private final BowlingGameEngine engine;
 
     private final String file;
@@ -22,7 +21,7 @@ public class Bowling {
         this.file = file;
 
         reader = new InMemoryTxtReader();
-        tokenizer = new BowlingTokenizer();
+        playReader = new BowlingPlayReader();
         engine = new KotlinGameEngine();
 
         safeExecute();
@@ -39,7 +38,7 @@ public class Bowling {
             List<String> lines = null;
             lines = reader.load(file);
 
-            List<BowlingPlay> plays = tokenizer.toPlays(lines);
+            List<BowlingPlay> plays = playReader.toPlays(lines);
             engine.start();
 
             // the more elegant plays.forEach(engine::addPlay)

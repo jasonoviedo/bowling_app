@@ -6,7 +6,7 @@ import org.jobsity.bowling.engine.frames.BowlingFrame
 /**
  * Holds information for one player
  */
-data class BowlingPlayer(var name: String, var score: Int = 0) {
+data class BowlingPlayer(var name: String) {
     /**
      * Frames are inited as standard 1 through 9 and especial the 10th
      */
@@ -23,7 +23,7 @@ data class BowlingPlayer(var name: String, var score: Int = 0) {
      * Records one play for the current frame,
      * advances to the next frame if necessary
      */
-    fun addPlay(play: BowlingPlay) {
+    fun addPlay(play: KotlinPlay) {
         if (currentFrame == 10)
             return //ignore
 
@@ -40,5 +40,9 @@ data class BowlingPlayer(var name: String, var score: Int = 0) {
 
         if (finished)
             currentFrame += 1
+    }
+
+    fun score(): Int {
+        return frames.sumBy { it.score }
     }
 }

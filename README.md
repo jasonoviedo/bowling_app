@@ -9,8 +9,8 @@ The program uses gradle.
 Java streams and lambdas are used.
 The main game engine is encapsulated behind
 a well defined interface, which allows full independence from
-implementation. To prove this, the implementation uses [Kotlin](https://kotlinlang.org),
-a JVM compatible language.
+implementation. To prove this, the implementation is written in [Kotlin](https://kotlinlang.org),
+a compatible JVM language.
 
 ## Usage
 For *Nix like systems, use gradlew, for Windows, gradlew.bat:

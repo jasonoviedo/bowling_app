@@ -7,9 +7,9 @@ public class BowlingEngineTests {
 
     @Test(expected = RuntimeException.class)
     public void testAddNewPlayers() {
-        BowlingPlay play1 = new BowlingPlay("Player1", 10, false);
-        BowlingPlay play2 = new BowlingPlay("Player2", 1, false);
-        BowlingPlay play3 = new BowlingPlay("Player3", 1, false);
+        KotlinPlay play1 = new KotlinPlay("Player1", 10, false);
+        KotlinPlay play2 = new KotlinPlay("Player2", 1, false);
+        KotlinPlay play3 = new KotlinPlay("Player3", 1, false);
         BowlingPlayer player1 = gameEngine.getOrRecordPlayerFor(play1);
         player1.addPlay(play1);
         BowlingPlayer player2 = gameEngine.getOrRecordPlayerFor(play2);

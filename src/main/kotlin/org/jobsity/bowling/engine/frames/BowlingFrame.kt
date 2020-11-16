@@ -1,26 +1,26 @@
 package org.jobsity.bowling.engine.frames
 
-import org.jobsity.bowling.engine.BowlingPlay
+import org.jobsity.bowling.engine.KotlinPlay
 
 /**
  * Models a frame. All logic regarding frame scoring and finishing
  * is contained here
  */
 open class BowlingFrame(open var frameNumber: Int) {
-    var plays = mutableListOf<BowlingPlay>()
+    var plays = mutableListOf<KotlinPlay>()
     var remainingPinCount = 10
     var remainingBalls = 2
     var unscored = true
     var score = 0
 
-    private var nextBalls = mutableListOf<BowlingPlay>()
+    private var nextBalls = mutableListOf<KotlinPlay>()
 
     /**
      * Adds a play to the frame
      * @return true if the frame is finished
      * @throws IllegalStateException
      */
-    fun addPlay(play: BowlingPlay): Boolean {
+    fun addPlay(play: KotlinPlay): Boolean {
         if (remainingBalls == 0)
             throw IllegalStateException("This frame has already finished")
 
@@ -36,7 +36,7 @@ open class BowlingFrame(open var frameNumber: Int) {
         return remainingBalls == 0
     }
 
-    protected open fun fixRemainingBalls(play: BowlingPlay) {
+    protected open fun fixRemainingBalls(play: KotlinPlay) {
         if (play.strike)
             remainingBalls -= 1
     }
@@ -46,7 +46,7 @@ open class BowlingFrame(open var frameNumber: Int) {
                 "${if (strike()) "x" else (if (spare()) "/" else plays[1].getPrintString())}\t"
     }
 
-    fun recordExtraBall(play: BowlingPlay) {
+    fun recordExtraBall(play: KotlinPlay) {
         if (!unscored)
             return
 

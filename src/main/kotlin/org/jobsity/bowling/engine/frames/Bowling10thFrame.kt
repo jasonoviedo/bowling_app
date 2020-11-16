@@ -1,14 +1,13 @@
 package org.jobsity.bowling.engine.frames
 
-import org.jobsity.bowling.engine.BowlingPlay
-import java.io.PrintStream
+import org.jobsity.bowling.engine.KotlinPlay
 
 /**
  * Models the special case for the 10th frame, whose logic changes
  * slightly (especially scoring)
  */
 class Bowling10thFrame(override var frameNumber: Int) : BowlingFrame(frameNumber) {
-    override fun fixRemainingBalls(play: BowlingPlay) {
+    override fun fixRemainingBalls(play: KotlinPlay) {
         if (play.strike) {
             remainingBalls += 1
             remainingPinCount += 20

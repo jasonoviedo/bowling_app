@@ -6,12 +6,22 @@ import org.jobsity.bowling.exceptions.PlayCannotBeLoadedException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BowlingTokenizer {
-    public BowlingTokenizer() {
+/**
+ * This class knows how to load a BowlingPlay out of a formatted line
+ */
+public class BowlingPlayReader {
+    public BowlingPlayReader() {
 
     }
 
-    public List<BowlingPlay> toPlays(List<String> lines) throws PlayCannotBeLoadedException{
+    /**
+     * List of lines to read
+     *
+     * @param lines Lines in the form PlayerName value
+     * @return List of read plays
+     * @throws PlayCannotBeLoadedException If something goes wrong
+     */
+    public List<BowlingPlay> toPlays(List<String> lines) throws PlayCannotBeLoadedException {
         return lines
                 .stream()
                 .map(this::toPlay)

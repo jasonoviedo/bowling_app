@@ -5,7 +5,7 @@ package org.jobsity.bowling.engine
  * @throws Constructor throws IllegalArgumentException if pin count is invalid
  * or if pin count and foul are set at the same time
  */
-data class BowlingPlay(var name: String, var pinCount: Int = 0, var foul: Boolean) {
+data class KotlinPlay(var name: String, var pinCount: Int = 0, var foul: Boolean) {
     var strike = false
     var spare = false
 
