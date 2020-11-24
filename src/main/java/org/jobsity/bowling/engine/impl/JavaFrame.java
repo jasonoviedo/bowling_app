@@ -102,6 +102,10 @@ public class JavaFrame {
         return this.plays.size() == 2 && this.remainingPinCount == 0;
     }
 
+    //********************************************************
+    // PROPERTY METHODS
+    //********************************************************
+
     public int getFrameNumber() {
         return this.frameNumber;
     }
@@ -109,7 +113,6 @@ public class JavaFrame {
     public void setFrameNumber(int var1) {
         this.frameNumber = var1;
     }
-
 
     @NotNull
     public final List<JavaPlay> getPlays() {

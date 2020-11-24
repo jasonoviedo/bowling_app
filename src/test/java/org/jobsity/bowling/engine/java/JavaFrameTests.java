@@ -3,6 +3,7 @@ package org.jobsity.bowling.engine.java;
 import org.jobsity.bowling.engine.impl.Java10thFrame;
 import org.jobsity.bowling.engine.impl.JavaFrame;
 import org.jobsity.bowling.engine.impl.JavaPlay;
+import org.jobsity.bowling.exceptions.IllegalPlayException;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -167,7 +168,7 @@ public class JavaFrameTests {
         assertEquals(6, frame.getScore());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = IllegalPlayException.class)
     public void testFrameAddPlayAfterFinished() {
         //Create a strike
         JavaFrame frame1 = new JavaFrame(1);

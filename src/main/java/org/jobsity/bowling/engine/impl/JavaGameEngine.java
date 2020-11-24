@@ -5,17 +5,20 @@ import org.jobsity.bowling.engine.BowlingGameEngine;
 import org.jobsity.bowling.engine.BowlingPlay;
 
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
- * Implementation is completely detached of API,
- * it can even be implemented in a different language
+ * Implementation is completely detached of API.
  * <p>
  * Entry point for the business logic. The main purpose of this
  * class is to hold player information, especially validate no more
  * players are added after the first round is completed
  */
+@SuppressWarnings("unused")
 public final class JavaGameEngine implements BowlingGameEngine {
     private boolean finishedFirstRound;
 
@@ -55,15 +58,27 @@ public final class JavaGameEngine implements BowlingGameEngine {
      * Print scores according to specification
      */
     public void printScore(@NotNull PrintStream out) {
-//       out.println("Frame\t\t" + List(10) { it + 1 }.joinToString(separator = "\t\t"))
+        String frames = IntStream.range(1, 11)
+                .mapToObj(Integer::toString)
+                .map(s -> s + "\t\t")
+                .collect(Collectors.joining());
+        out.println(frames);
+
         for (JavaPlayer player : players.values()) {
             out.println(player.getName());
             int cumulativeScore = 0;
-//          val str1 = player.frames.joinToString(separator = "") { it.getPrintString() }
-//          val str2 =
-//                  player.frames.joinToString(separator = "\t\t") { cumulativeScore += it.score; "$cumulativeScore" }
-//          out.println("Pinfalls\t$str1")
-//          out.println("Score\t $str2")
+
+            String str1 = Arrays.stream(player.getFrames()).map(JavaFrame::getPrintString).collect(Collectors.joining());
+
+            StringBuilder sb = new StringBuilder();
+            for (JavaFrame frame : player.getFrames()) {
+                cumulativeScore += frame.getScore();
+                sb.append(cumulativeScore);
+                sb.append("\t\t");
+            }
+            String str2 = sb.toString();
+            out.println("Pinfalls\t " + str1);
+            out.println("Score\t " + str2);
         }
     }
 
@@ -77,6 +92,10 @@ public final class JavaGameEngine implements BowlingGameEngine {
     public void start() {
         this.players.clear();
     }
+
+    //********************************************************
+    // PROPERTY METHODS
+    //********************************************************
 
     @NotNull
     public final Map<String, JavaPlayer> getPlayers() {

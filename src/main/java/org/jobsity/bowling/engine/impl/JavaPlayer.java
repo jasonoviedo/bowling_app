@@ -64,6 +64,10 @@ public final class JavaPlayer {
                 .sum();
     }
 
+    //********************************************************
+    // PROPERTY METHODS
+    //********************************************************
+
     @NotNull
     public final String getName() {
         return this.name;
@@ -91,14 +95,13 @@ public final class JavaPlayer {
         this.currentFrame = value;
     }
 
-    @NotNull
-    public final JavaPlayer copy(@NotNull String name) {
-        return new JavaPlayer(name);
-    }
+    //********************************************************
+    // REQUIRED OVERRIDES
+    //********************************************************
 
     @NotNull
     public String toString() {
-        return "BowlingPlayer(name=" + this.name + ")";
+        return "JavaPlayer(name=" + this.name + ")";
     }
 
     public int hashCode() {

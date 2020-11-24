@@ -48,6 +48,10 @@ public final class Java10thFrame extends JavaFrame {
                 .sum();
     }
 
+    //********************************************************
+    // PROPERTY METHODS
+    //********************************************************
+
     public int getFrameNumber() {
         return this.frameNumber;
     }

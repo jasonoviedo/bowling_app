@@ -40,6 +40,10 @@ public final class JavaPlay {
         return this.foul ? 0 : this.pinCount;
     }
 
+    //********************************************************
+    // PROPERTY METHODS
+    //********************************************************
+
     @NotNull
     public final String getPrintString() {
         return this.pinCount == 10 ? "x" : (this.foul ? "F" : String.valueOf(this.pinCount));
@@ -86,6 +90,10 @@ public final class JavaPlay {
     public final void setFoul(boolean value) {
         this.foul = value;
     }
+
+    //********************************************************
+    // REQUIRED OVERRIDES
+    //********************************************************
 
     @NotNull
     public String toString() {
