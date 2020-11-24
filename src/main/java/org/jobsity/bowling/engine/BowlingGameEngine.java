@@ -1,6 +1,6 @@
 package org.jobsity.bowling.engine;
 
-import org.jobsity.bowling.exceptions.IlegalPlayException;
+import org.jobsity.bowling.exceptions.IllegalPlayException;
 
 import java.io.PrintStream;
 
@@ -22,7 +22,7 @@ public interface BowlingGameEngine {
      * Adds the next play to the engine.
      * @param play Play to be added
      */
-    void addPlay(BowlingPlay play) throws IlegalPlayException;
+    void addPlay(BowlingPlay play) throws IllegalPlayException;
 
     /**
      * Prepares the engine

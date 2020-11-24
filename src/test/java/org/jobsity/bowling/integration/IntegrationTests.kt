@@ -4,6 +4,7 @@ import org.jobsity.bowling.BowlingPlayReader
 import org.jobsity.bowling.engine.BowlingPlay
 import org.jobsity.bowling.engine.KotlinPlay
 import org.jobsity.bowling.engine.KotlinGameEngine
+import org.jobsity.bowling.engine.impl.JavaGameEngine
 import org.jobsity.bowling.reader.InMemoryTxtReader
 import org.jobsity.bowling.reader.TxtReader
 import org.junit.Before
@@ -14,11 +15,11 @@ import org.junit.Assert.*
 class IntegrationTests {
     private lateinit var playReader: BowlingPlayReader
     private lateinit var reader: TxtReader
-    private lateinit var engine: KotlinGameEngine
+    private lateinit var engine: JavaGameEngine
 
     @Before
     fun setup() {
-        engine = KotlinGameEngine()
+        engine = JavaGameEngine()
         reader = InMemoryTxtReader()
         playReader = BowlingPlayReader()
     }
