@@ -1,35 +1,16 @@
 package org.jobsity.bowling.engine;
 
 /**
- * Data class to hold play (ball) info.
+ * API for basic play info consulting
  */
-public class BowlingPlay {
-    private final String name;
-    private final int pinCount;
-    private final boolean foul;
+public interface BowlingPlay {
+    int getScore();
 
-    public BowlingPlay(String name, int pinCount, boolean foul) {
-        if (pinCount > 10 || pinCount < 0)
-            throw new IllegalArgumentException("Invalid pin count: " + pinCount + ". Only values 0 -> 10 are permitted");
+    boolean isStrike();
 
-        if (foul && pinCount != 0)
-            throw new IllegalArgumentException("Foul and pinCount set for the same play");
+    boolean isSpare();
 
-        this.name = name;
-        this.pinCount = pinCount;
-        this.foul = foul;
-    }
+    int getPinCount();
 
-
-    public String getName() {
-        return name;
-    }
-
-    public int getPinCount() {
-        return pinCount;
-    }
-
-    public boolean isFoul() {
-        return foul;
-    }
+    boolean isFoul();
 }

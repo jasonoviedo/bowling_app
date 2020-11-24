@@ -13,7 +13,7 @@ public class JavaPlayTests {
         JavaPlay p1 = new JavaPlay("John", 10, false);
         assertEquals("John", p1.getName());
         assertEquals(10, p1.getPinCount());
-        assertFalse(p1.getFoul());
+        assertFalse(p1.isFoul());
 
         //Now, test an invalid pinCount, it should throw
         new JavaPlay("John", 11, false);

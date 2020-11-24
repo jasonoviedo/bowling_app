@@ -1,6 +1,7 @@
 package org.jobsity.bowling.engine.impl;
 
 import org.jetbrains.annotations.NotNull;
+import org.jobsity.bowling.engine.BowlingFrame;
 import org.jobsity.bowling.exceptions.IllegalPlayException;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.List;
  * is contained here
  */
 @SuppressWarnings("unused")
-public class JavaFrame {
+public class JavaFrame implements BowlingFrame {
     @NotNull
     protected List<JavaPlay> plays;
     private int remainingPinCount;
@@ -46,7 +47,7 @@ public class JavaFrame {
         this.plays.add(play);
         play.setStrike(this.remainingPinCount == 0 && this.plays.size() == 1);
         play.setSpare(this.remainingPinCount == 0 && this.plays.size() == 2);
-        this.unscored = play.getStrike() || play.getSpare();
+        this.unscored = play.isStrike() || play.isSpare();
         this.fixRemainingBalls(play);
         return this.remainingBalls == 0;
     }
@@ -57,14 +58,9 @@ public class JavaFrame {
      * @param play Current play
      */
     protected void fixRemainingBalls(@NotNull JavaPlay play) {
-        if (play.getStrike()) {
+        if (play.isStrike()) {
             this.remainingBalls = 0;
         }
-    }
-
-    @NotNull
-    public String getPrintString() {
-        return (!this.strike() ? (this.plays.get(0)).getPrintString() : "") + '\t' + (this.strike() ? "x" : (this.spare() ? "/" : (this.plays.get(1)).getPrintString())) + '\t';
     }
 
     /**
@@ -80,7 +76,7 @@ public class JavaFrame {
     }
 
     public final void scoreFrame() {
-        if (this.strike() && this.nextBalls.size() == 2 || this.spare() && this.nextBalls.size() == 1) {
+        if (this.isStrike() && this.nextBalls.size() == 2 || this.isSpare() && this.nextBalls.size() == 1) {
             this.unscored = false;
         }
 
@@ -90,16 +86,18 @@ public class JavaFrame {
     protected void doCalculateScore() {
         int res = this.nextBalls
                 .stream()
-                .mapToInt(JavaPlay::score)
+                .mapToInt(JavaPlay::getScore)
                 .sum();
         score = 10 - this.remainingPinCount + res;
     }
 
-    private boolean strike() {
+    @Override
+    public boolean isStrike() {
         return this.plays.size() == 1 && this.remainingPinCount == 0;
     }
 
-    private boolean spare() {
+    @Override
+    public boolean isSpare() {
         return this.plays.size() == 2 && this.remainingPinCount == 0;
     }
 
@@ -107,6 +105,7 @@ public class JavaFrame {
     // PROPERTY METHODS
     //********************************************************
 
+    @Override
     public int getFrameNumber() {
         return this.frameNumber;
     }
@@ -144,6 +143,7 @@ public class JavaFrame {
         this.unscored = value;
     }
 
+    @Override
     public final int getScore() {
         return this.score;
     }

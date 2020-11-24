@@ -2,14 +2,12 @@ package org.jobsity.bowling.engine.impl;
 
 import org.jetbrains.annotations.NotNull;
 import org.jobsity.bowling.engine.BowlingGameEngine;
+import org.jobsity.bowling.reader.BowlingPlayVO;
+import org.jobsity.bowling.engine.BowlingFrame;
 import org.jobsity.bowling.engine.BowlingPlay;
 
-import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Implementation is completely detached of API.
@@ -27,6 +25,38 @@ public final class JavaGameEngine implements BowlingGameEngine {
 
     public JavaGameEngine() {
     }
+
+    public void addPlay(@NotNull BowlingPlayVO play) {
+        String name = play.getName();
+        JavaPlay javaPlay = new JavaPlay(name, play.getPinCount(), play.isFoul());
+        JavaPlayer player = this.getOrRecordPlayerFor(javaPlay);
+        player.addPlay(javaPlay);
+    }
+
+    public void start() {
+        this.players.clear();
+    }
+
+    @Override
+    public List<String> getPlayerList() {
+        return players
+                .values()
+                .stream()
+                .map(JavaPlayer::getName)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BowlingFrame> getFrames(String player) {
+        return Arrays.asList(players.get(player).getFrames());
+    }
+
+    @Override
+    public List<BowlingPlay> getPlays(String player, BowlingFrame frame) {
+        @NotNull JavaFrame[] frames = players.get(player).getFrames();
+        return new ArrayList<>(frames[frame.getFrameNumber()].getPlays());
+    }
+
 
     /**
      * Add a new player or access an existing one
@@ -52,45 +82,6 @@ public final class JavaGameEngine implements BowlingGameEngine {
         }
 
         return player;
-    }
-
-    /**
-     * Print scores according to specification
-     */
-    public void printScore(@NotNull PrintStream out) {
-        String frames = IntStream.range(1, 11)
-                .mapToObj(Integer::toString)
-                .map(s -> s + "\t\t")
-                .collect(Collectors.joining());
-        out.println("Frame\t\t" + frames);
-
-        for (JavaPlayer player : players.values()) {
-            out.println(player.getName());
-            int cumulativeScore = 0;
-
-            String str1 = Arrays.stream(player.getFrames()).map(JavaFrame::getPrintString).collect(Collectors.joining());
-
-            StringBuilder sb = new StringBuilder();
-            for (JavaFrame frame : player.getFrames()) {
-                cumulativeScore += frame.getScore();
-                sb.append(cumulativeScore);
-                sb.append("\t\t");
-            }
-            String str2 = sb.toString();
-            out.println("Pinfalls\t" + str1);
-            out.println("Score\t\t" + str2);
-        }
-    }
-
-    public void addPlay(@NotNull BowlingPlay play) {
-        String name = play.getName();
-        JavaPlay javaPlay = new JavaPlay(name, play.getPinCount(), play.isFoul());
-        JavaPlayer player = this.getOrRecordPlayerFor(javaPlay);
-        player.addPlay(javaPlay);
-    }
-
-    public void start() {
-        this.players.clear();
     }
 
     //********************************************************

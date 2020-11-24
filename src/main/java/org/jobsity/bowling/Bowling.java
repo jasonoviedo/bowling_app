@@ -1,12 +1,15 @@
 package org.jobsity.bowling;
 
 import org.jobsity.bowling.engine.BowlingGameEngine;
-import org.jobsity.bowling.engine.BowlingPlay;
 import org.jobsity.bowling.engine.impl.JavaGameEngine;
-import org.jobsity.bowling.reader.InMemoryTxtReader;
+import org.jobsity.bowling.printer.impl.BowlingPrinterImpl;
+import org.jobsity.bowling.printer.BowlingPrinter;
+import org.jobsity.bowling.reader.BowlingPlayReader;
+import org.jobsity.bowling.reader.impl.BowlingPlayReaderImpl;
+import org.jobsity.bowling.reader.BowlingPlayVO;
 import org.jobsity.bowling.reader.TxtReader;
+import org.jobsity.bowling.reader.impl.InMemoryTxtReader;
 
-import java.io.PrintStream;
 import java.util.List;
 
 /**
@@ -22,7 +25,7 @@ public class Bowling {
     private final TxtReader reader;
     private final BowlingPlayReader playReader;
     private final BowlingGameEngine engine;
-    private final PrintStream out;
+    private final BowlingPrinter printer;
 
     private final String file;
 
@@ -30,9 +33,9 @@ public class Bowling {
         this.file = file;
 
         reader = new InMemoryTxtReader();
-        playReader = new BowlingPlayReader();
+        playReader = new BowlingPlayReaderImpl();
         engine = new JavaGameEngine();
-        out = System.out;
+        printer = new BowlingPrinterImpl(System.out);
 
         safeExecute();
     }
@@ -47,20 +50,16 @@ public class Bowling {
         try {
             List<String> lines = reader.load(file);
 
-            List<BowlingPlay> plays = playReader.toPlays(lines);
+            List<BowlingPlayVO> plays = playReader.toPlays(lines);
             engine.start();
 
             // The more elegant plays.forEach(engine::addPlay)
             // is not permitted as the invocation requires explicit
             // exception handling
-            for (BowlingPlay play : plays) {
+            for (BowlingPlayVO play : plays) {
                 engine.addPlay(play);
             }
-            out.println();
-            out.println();
-            out.println("=================================");
-            out.println();
-            engine.printScore(out);
+            printer.printScore(engine);
         } catch (Throwable e) {
             System.err.println(e.getMessage());
             throw new RuntimeException("Execution terminated");

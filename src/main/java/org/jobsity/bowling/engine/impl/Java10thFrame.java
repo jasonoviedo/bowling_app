@@ -16,26 +16,15 @@ public final class Java10thFrame extends JavaFrame {
 
     @Override
     protected void fixRemainingBalls(@NotNull JavaPlay play) {
-        if (play.getStrike()) {
+        if (play.isStrike()) {
             this.setRemainingBalls(this.getRemainingBalls() + 1);
             this.setRemainingPinCount(this.getRemainingPinCount() + 20);
         }
 
-        if (play.getSpare()) {
+        if (play.isSpare()) {
             this.setRemainingBalls(this.getRemainingBalls() + 1);
             this.setRemainingPinCount(this.getRemainingPinCount() + 10);
         }
-    }
-
-    /**
-     * Extend base functionality to include the third ball when appropriate
-     */
-    @NotNull
-    public String getPrintString() {
-        String thirdBall = this.getPlays().size() == 3
-                ? this.getPlays().get(2).getPrintString()
-                : "";
-        return super.getPrintString() + thirdBall;
     }
 
     /**
@@ -44,7 +33,7 @@ public final class Java10thFrame extends JavaFrame {
     protected void doCalculateScore() {
         score = plays
                 .stream()
-                .mapToInt(JavaPlay::score)
+                .mapToInt(JavaPlay::getScore)
                 .sum();
     }
 

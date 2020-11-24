@@ -1,7 +1,8 @@
-package org.jobsity.bowling;
+package org.jobsity.bowling.reader.impl;
 
-import org.jobsity.bowling.engine.BowlingPlay;
 import org.jobsity.bowling.exceptions.PlayCannotBeLoadedException;
+import org.jobsity.bowling.reader.BowlingPlayVO;
+import org.jobsity.bowling.reader.BowlingPlayReader;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,8 +10,8 @@ import java.util.stream.Collectors;
 /**
  * This class knows how to load a BowlingPlay out of a formatted line
  */
-public class BowlingPlayReader {
-    public BowlingPlayReader() {
+public class BowlingPlayReaderImpl implements BowlingPlayReader {
+    public BowlingPlayReaderImpl() {
 
     }
 
@@ -21,14 +22,15 @@ public class BowlingPlayReader {
      * @return List of read plays
      * @throws PlayCannotBeLoadedException If something goes wrong
      */
-    public List<BowlingPlay> toPlays(List<String> lines) throws PlayCannotBeLoadedException {
+    @Override
+    public List<BowlingPlayVO> toPlays(List<String> lines) throws PlayCannotBeLoadedException {
         return lines
                 .stream()
                 .map(this::toPlay)
                 .collect(Collectors.toList());
     }
 
-    BowlingPlay toPlay(String line) throws PlayCannotBeLoadedException {
+    BowlingPlayVO toPlay(String line) throws PlayCannotBeLoadedException {
         String[] split = line.split(" ");
         if (split.length != 2)
             throw new PlayCannotBeLoadedException("Wrong format in line " + line);
@@ -42,6 +44,6 @@ public class BowlingPlayReader {
                 throw new RuntimeException(e);
             fault = true;
         }
-        return new BowlingPlay(split[0], pins, fault);
+        return new BowlingPlayVO(split[0], pins, fault);
     }
 }

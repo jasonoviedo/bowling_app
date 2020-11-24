@@ -2,6 +2,7 @@ package org.jobsity.bowling.engine.impl;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jobsity.bowling.engine.BowlingPlay;
 
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ import java.util.Objects;
  * Data class to hold play (ball) info.
  */
 @SuppressWarnings("unused")
-public final class JavaPlay {
+public final class JavaPlay implements BowlingPlay {
     @NotNull
     private String name;
     private boolean strike;
@@ -37,7 +38,8 @@ public final class JavaPlay {
         }
     }
 
-    public final int score() {
+    @Override
+    public final int getScore() {
         return this.foul ? 0 : this.pinCount;
     }
 
@@ -45,13 +47,8 @@ public final class JavaPlay {
     // PROPERTY METHODS
     //********************************************************
 
-    @NotNull
-    public final String getPrintString() {
-        return this.pinCount == 10 ? "x" : (this.foul ? "F" : String.valueOf(this.pinCount));
-    }
-
-
-    public final boolean getStrike() {
+    @Override
+    public final boolean isStrike() {
         return this.strike;
     }
 
@@ -59,7 +56,8 @@ public final class JavaPlay {
         this.strike = value;
     }
 
-    public final boolean getSpare() {
+    @Override
+    public final boolean isSpare() {
         return this.spare;
     }
 
@@ -76,6 +74,7 @@ public final class JavaPlay {
         this.name = value;
     }
 
+    @Override
     public final int getPinCount() {
         return this.pinCount;
     }
@@ -84,7 +83,8 @@ public final class JavaPlay {
         this.pinCount = value;
     }
 
-    public final boolean getFoul() {
+    @Override
+    public final boolean isFoul() {
         return this.foul;
     }
 

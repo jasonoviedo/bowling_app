@@ -1,10 +1,10 @@
 package org.jobsity.bowling.integration;
 
-import org.jobsity.bowling.BowlingPlayReader;
-import org.jobsity.bowling.engine.BowlingPlay;
+import org.jobsity.bowling.reader.impl.BowlingPlayReaderImpl;
+import org.jobsity.bowling.reader.BowlingPlayVO;
 import org.jobsity.bowling.engine.impl.JavaGameEngine;
 import org.jobsity.bowling.exceptions.FileCannotBeLoadedException;
-import org.jobsity.bowling.reader.InMemoryTxtReader;
+import org.jobsity.bowling.reader.impl.InMemoryTxtReader;
 import org.jobsity.bowling.reader.TxtReader;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class IntegrationJavaTests {
-    private BowlingPlayReader playReader;
+    private BowlingPlayReaderImpl playReader;
     private TxtReader reader;
     private JavaGameEngine engine;
 
@@ -22,7 +22,7 @@ public class IntegrationJavaTests {
     public void setup() {
         engine = new JavaGameEngine();
         reader = new InMemoryTxtReader();
-        playReader = new BowlingPlayReader();
+        playReader = new BowlingPlayReaderImpl();
     }
 
     @Test
@@ -46,7 +46,7 @@ public class IntegrationJavaTests {
 
     private void loadFile(String s) throws FileCannotBeLoadedException {
         List<String> lines = reader.load(s);
-        List<BowlingPlay> plays = playReader.toPlays(lines);
+        List<BowlingPlayVO> plays = playReader.toPlays(lines);
         engine.start();
         plays.forEach(engine::addPlay);
     }
