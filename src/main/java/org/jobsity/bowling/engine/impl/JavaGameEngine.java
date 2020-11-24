@@ -62,7 +62,7 @@ public final class JavaGameEngine implements BowlingGameEngine {
                 .mapToObj(Integer::toString)
                 .map(s -> s + "\t\t")
                 .collect(Collectors.joining());
-        out.println(frames);
+        out.println("Frame\t\t" + frames);
 
         for (JavaPlayer player : players.values()) {
             out.println(player.getName());
