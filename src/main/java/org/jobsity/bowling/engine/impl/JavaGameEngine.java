@@ -77,8 +77,8 @@ public final class JavaGameEngine implements BowlingGameEngine {
                 sb.append("\t\t");
             }
             String str2 = sb.toString();
-            out.println("Pinfalls\t " + str1);
-            out.println("Score\t " + str2);
+            out.println("Pinfalls\t" + str1);
+            out.println("Score\t\t" + str2);
         }
     }
 
