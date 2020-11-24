@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 /**
  * Holds information for one player
  */
+@SuppressWarnings("unused")
 public final class JavaPlayer {
 
     @NotNull
@@ -73,8 +74,8 @@ public final class JavaPlayer {
         return this.name;
     }
 
-    public final void setName(@NotNull String var1) {
-        this.name = var1;
+    public final void setName(@NotNull String value) {
+        this.name = value;
     }
 
 
@@ -96,7 +97,7 @@ public final class JavaPlayer {
     }
 
     //********************************************************
-    // REQUIRED OVERRIDES
+    // OBJECT OVERRIDES
     //********************************************************
 
     @NotNull

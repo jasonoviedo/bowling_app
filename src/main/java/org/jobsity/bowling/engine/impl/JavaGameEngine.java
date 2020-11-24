@@ -31,7 +31,7 @@ public final class JavaGameEngine implements BowlingGameEngine {
     /**
      * Add a new player or access an existing one
      *
-     * @throws IllegalStateException When a player is added after frist round
+     * @throws IllegalStateException When a player is added after first round
      */
     @NotNull
     public final JavaPlayer getOrRecordPlayerFor(@NotNull JavaPlay p) {

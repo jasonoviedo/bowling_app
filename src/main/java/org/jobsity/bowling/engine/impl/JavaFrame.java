@@ -10,6 +10,7 @@ import java.util.List;
  * Models a frame. All logic regarding frame scoring and finishing
  * is contained here
  */
+@SuppressWarnings("unused")
 public class JavaFrame {
     @NotNull
     protected List<JavaPlay> plays;

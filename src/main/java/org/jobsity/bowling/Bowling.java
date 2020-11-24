@@ -9,6 +9,13 @@ import org.jobsity.bowling.reader.TxtReader;
 import java.io.PrintStream;
 import java.util.List;
 
+/**
+ * According to spec, this class will:
+ * 1. Load a data file containing plays
+ * 2. Read data into bowling plays
+ * 3. Pass the plays to game engine for processing
+ * 4. Ask engine to print results
+ */
 public class Bowling {
 
     //These could be injected using a dependency injector like Guice

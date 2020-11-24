@@ -8,6 +8,7 @@ import java.util.Objects;
 /**
  * Data class to hold play (ball) info.
  */
+@SuppressWarnings("unused")
 public final class JavaPlay {
     @NotNull
     private String name;
@@ -92,7 +93,7 @@ public final class JavaPlay {
     }
 
     //********************************************************
-    // REQUIRED OVERRIDES
+    // OBJECT OVERRIDES
     //********************************************************
 
     @NotNull
