@@ -2,15 +2,19 @@
 
 A program that can read a file containing the information
 for a bowling game, process it and render it to
-a table to stdout.
+a table to an injectable print stream.
 
 ## Considerations
 The program uses gradle.
 Java streams and lambdas are used.
 The main game engine is encapsulated behind
 a well defined interface, which allows full independence from
-implementation. To prove this, the implementation is written in [Kotlin](https://kotlinlang.org),
-a compatible JVM language.
+implementation. 
+
+The program is designed to solve the stated problem, prioritizing:
+1. Readability: Code should be easy to follow
+2. Separation of concerns: Well defined responsibilities
+3. Pragmatism: Do not solve un-existent problems.
 
 ## Usage
 For *Nix like systems, use gradlew, for Windows, gradlew.bat:
